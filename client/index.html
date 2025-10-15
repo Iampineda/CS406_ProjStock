@@ -1,109 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stock AI — UI Sketch (Static)</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header>
-    <div class="wrap">
-      <h1 class="title">Stock AI — Client UI (Static Sketch)</h1>
-      <p class="subtitle">A minimal, static mock used to sketch the page layout &amp; user interface. No backend required.</p>
-    </div>
-  </header>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>P_Stock AI — Simple Client</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+  </head>
 
-  <main class="wrap">
-    <div class="grid">
-      <!-- Left: Form -->
-      <section class="card" aria-labelledby="form-title">
-        <h2 id="form-title">Prediction Request</h2>
+  <body>
+    <div class="top">
+      <h1 class="title">P_Stock AI — Simple Client</h1>
+      <p class="tag">
+        Type a ticker, pick a forecast horizon, choose indicators, and see a
+        JSON preview.
+      </p>
+    </div>
+
+    <div class="page">
+      <div class="box">
+        <h2 class="box-title">Prediction Request</h2>
+
         <div class="row">
-          <div>
-            <label for="ticker">Stock Ticker</label>
-            <select id="ticker" name="ticker">
-              <option value="SPY">SPY — S&amp;P 500 ETF</option>
-              <option value="AAPL">AAPL — Apple</option>
-              <option value="MSFT">MSFT — Microsoft</option>
-              <option value="TSLA">TSLA — Tesla</option>
-              <option value="NVDA">NVDA — NVIDIA</option>
-            </select>
-          </div>
-          <div>
-            <label for="horizon">Forecast Horizon</label>
-            <select id="horizon" name="horizon">
-              <option value="1d">1 Day</option>
-              <option value="5d">5 Days</option>
-              <option value="10d">10 Days</option>
-            </select>
-          </div>
+          <label class="label" for="ticker">Stock Ticker</label>
+          <input class="input" id="ticker" type="text" placeholder="SPY" />
         </div>
 
-        <fieldset style="margin-top:14px">
-          <legend>Technical Indicators</legend>
-          <div class="checks" id="indicators">
-            <label><input type="checkbox" value="EMA" checked> EMA</label>
-            <label><input type="checkbox" value="RSI" checked> RSI</label>
-            <label><input type="checkbox" value="MACD"> MACD</label>
-            <label><input type="checkbox" value="VWAP"> VWAP</label>
-            <label><input type="checkbox" value="BOLL"> Bollinger Bands</label>
-            <label><input type="checkbox" value="SAR"> Parabolic SAR</label>
-            <label><input type="checkbox" value="OBV"> OBV</label>
-            <label><input type="checkbox" value="BBWidth"> BB Width</label>
-          </div>
-        </fieldset>
-
-        <div style="margin-top:14px">
-          <label for="notes">Notes (optional)</label>
-          <textarea id="notes" placeholder="e.g., emphasize momentum, ignore premarket gaps..."></textarea>
+        <div class="row">
+          <label class="label" for="horizon">Forecast Horizon</label>
+          <select class="select" id="horizon">
+            <option value="1d">1 Day</option>
+            <option value="5d">5 Days</option>
+            <option value="10d">10 Days</option>
+          </select>
         </div>
 
-        <div class="actions" style="margin-top:14px">
-          <button class="btn btn-primary" id="btn-submit">Submit (Mock)</button>
-          <button class="btn" id="btn-sample" type="button">Fill Sample</button>
-          <button class="btn btn-ghost" id="btn-clear" type="button">Clear</button>
+        <div class="checks">
+          <p class="small">Technical Indicators</p>
+          <label class="check"
+            ><input type="checkbox" value="EMA" checked /> EMA</label
+          >
+          <label class="check"
+            ><input type="checkbox" value="RSI" checked /> RSI</label
+          >
+          <label class="check"
+            ><input type="checkbox" value="MACD" /> MACD</label
+          >
+          <label class="check"
+            ><input type="checkbox" value="VWAP" /> VWAP</label
+          >
+          <label class="check"
+            ><input type="checkbox" value="BOLL" /> Bollinger Bands</label
+          >
+          <label class="check"
+            ><input type="checkbox" value="SAR" /> Parabolic SAR</label
+          >
+          <label class="check"><input type="checkbox" value="OBV" /> OBV</label>
         </div>
 
-        <div class="sketch" aria-label="Wireframe sketch for screenshot">
-          <div class="sk-box">Header / Title</div>
-          <div class="sk-box">Summary / Subtitle</div>
-          <div class="sk-box">Form — Ticker / Horizon</div>
-          <div class="sk-box">Form — Indicators</div>
-          <div class="sk-box">Actions</div>
-          <div class="sk-box">Results Panel</div>
+        <div class="actions">
+          <button class="button" id="show">Preview Request</button>
+          <button class="button secondary" id="clear">Clear</button>
         </div>
-      </section>
+      </div>
 
-      <!-- Right: Result (Mock JSON) -->
-      <section class="card" aria-labelledby="result-title">
-        <h2 id="result-title">Response (JSON)</h2>
-        <div class="actions" style="margin-bottom:10px">
-          <span class="chip" id="status-chip">Status: idle</span>
-          <button class="btn" id="copy-json" type="button">Copy JSON</button>
-        </div>
-        <pre class="code" id="json-output" aria-live="polite">{
-  "message": "Submit the form to see a mock response"
-}</pre>
-        <p class="hint">This is a <em>simulated</em> response to demonstrate the layout &amp; UI. Hook this up to your real API later.</p>
-      </section>
+      <div class="box">
+        <h2 class="box-title">Response (JSON)</h2>
+        <pre class="code" id="output">
+            {"message": "Fill the form and click Preview Request"}
+        </pre>
+      </div>
     </div>
 
-    <!-- Optional: simple explanation box for the screenshot -->
-    <section class="card" style="margin-top:18px" aria-labelledby="explain-title">
-      <h2 id="explain-title">What this page demonstrates</h2>
-      <ul>
-        <li>Static sketch of a client UI for selecting a <strong>ticker</strong>, <strong>forecast horizon</strong>, and <strong>indicators</strong>.</li>
-        <li>Form submission that returns a <strong>JSON</strong> object (mocked) with prediction fields you can mirror in your backend.</li>
-        <li>Clean, single-file HTML/CSS/JS — no build tools, no frameworks.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    Static mock for OSU CS406 “Stock AI Predictor API” — front-end sketch only.
-  </footer>
-
-  <script src="app.js"></script>
-</body>
+    <div class="foot">
+      <p>© 2025 Humberto PinedaRubio. All rights reserved.</p>
+    </div>
+  </body>
 </html>

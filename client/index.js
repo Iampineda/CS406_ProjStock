@@ -1,38 +1,53 @@
-import express from "express";
-import yf from "yahoo-finance2";
-import * as tf from "@tensorflow/tfjs-node";
-import "dotenv/config";
+function getIndicators() {
+    var boxes = document.querySelectorAll('.checks input[type="checkbox"]');
+    var list = [];
+    for (var i = 0; i < boxes.length; i++) {
+        if (boxes[i].checked) {
+            list.push(boxes[i].value);
+        }
+    }
+    return list;
+}
 
-const app = express();
-app.use(express.json());
+function buildJson() {
+    var t = document.getElementById("ticker").value || "SPY";
+    var h = document.getElementById("horizon").value;
+    var ind = getIndicators();
 
-app.get("/predict", async (req, res) => {
-  const symbol = (req.query.symbol || "SPY").toString().toUpperCase();
-  const rows = await yf.historical(symbol, { period1: "2023-01-01" });
-  // super tiny example feature: last N closes normalized
-  const closes = rows.map(r => r.close).slice(-60);
-  if (closes.length < 30) return res.status(400).json({ error: "Not enough data" });
+    var data = {
+        request: {
+            ticker: t,
+            horizon: h,
+            indicators: ind,
+        },
+        result: {
+            prediction: "example",
+            confidence: 0,
+        },
+    };
 
-  // toy model (load if exists, else build)
-  let model;
-  try { model = await tf.loadLayersModel("file://models/model.json"); }
-  catch {
-    model = tf.sequential();
-    model.add(tf.layers.dense({ units: 16, inputShape: [30], activation: "relu" }));
-    model.add(tf.layers.dense({ units: 3, activation: "softmax" })); // up/down/neutral
-    model.compile({ optimizer: "adam", loss: "categoricalCrossentropy" });
-  }
+    return JSON.stringify(data, null, 2);
+}
 
-  // create a trivial input: last 30 closes normalized
-  const last30 = closes.slice(-30);
-  const mean = last30.reduce((a,b)=>a+b,0)/last30.length;
-  const std = Math.sqrt(last30.reduce((s,x)=>s+(x-mean)**2,0)/last30.length) || 1;
-  const x = tf.tensor2d([ last30.map(v => (v-mean)/std) ]);
+window.onload = function () {
+    var out = document.getElementById("output");
+    var showBtn = document.getElementById("show");
+    var clearBtn = document.getElementById("clear");
 
-  const probs = model.predict(x).dataSync();
-  const labels = ["down","neutral","up"];
-  const idx = probs.indexOf(Math.max(...probs));
-  res.json({ symbol, prediction: labels[idx], confidence: Number(probs[idx].toFixed(2)) });
-});
+    showBtn.addEventListener("click", function () {
+        out.textContent = buildJson();
+    });
 
-app.listen(3000, () => console.log("API on http://localhost:3000"));
+    clearBtn.addEventListener("click", function () {
+        document.getElementById("ticker").value = "";
+        document.getElementById("horizon").selectedIndex = 0;
+        var boxes = document.querySelectorAll(
+            '.checks input[type="checkbox"]'
+        );
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].checked = false;
+        }
+        out.textContent =
+            '{\n  "message": "Fill the form and click Preview Request"\n}';
+    });
+};
