@@ -1,78 +1,68 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>P_Stock AI — Simple Client</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="index.js"></script>
-  </head>
+<html lang="en">
 
-  <body>
-    <div class="top">
-      <h1 class="title">P_Stock AI — Simple Client</h1>
-      <p class="tag">
-        Type a ticker, pick a forecast horizon, choose indicators, and see a
-        JSON preview.
-      </p>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <title>P_Stock AI — Simple Client</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="index.js"></script>
+    </head>
 
-    <div class="page">
-      <div class="box">
-        <h2 class="box-title">Prediction Request</h2>
-
-        <div class="row">
-          <label class="label" for="ticker">Stock Ticker</label>
-          <input class="input" id="ticker" type="text" placeholder="SPY" />
+    <body>
+        <div class="top">
+            <h1 class="title">P_Stock AI — Simple Client</h1>
+            <p class="tag">
+                Type a ticker, pick a forecast horizon, choose indicators, and see a
+                JSON preview.
+            </p>
         </div>
 
-        <div class="row">
-          <label class="label" for="horizon">Forecast Horizon</label>
-          <select class="select" id="horizon">
-            <option value="1d">1 Day</option>
-            <option value="5d">5 Days</option>
-            <option value="10d">10 Days</option>
-          </select>
+        <div class="page">
+            <div class="box">
+                <h2 class="box-title">Prediction Request</h2>
+
+                <div class="row">
+                    <label class="label" for="ticker">Stock Ticker</label>
+                    <input class="input" id="ticker" type="text" placeholder="SPY" />
+                </div>
+
+                <div class="row">
+                    <label class="label" for="horizon">Forecast Horizon</label>
+                    <select class="select" id="horizon">
+                        <option value="1d">1 Day</option>
+                        <option value="5d">5 Days</option>
+                        <option value="10d">10 Days</option>
+                    </select>
+                </div>
+
+                <div class="checks">
+                    <p class="small">Technical Indicators</p>
+                    <label class="check"><input type="checkbox" value="EMA" checked /> EMA</label>
+                    <label class="check"><input type="checkbox" value="RSI" checked /> RSI</label>
+                    <label class="check"><input type="checkbox" value="MACD" /> MACD</label>
+                    <label class="check"><input type="checkbox" value="VWAP" /> VWAP</label>
+                    <label class="check"><input type="checkbox" value="BOLL" /> Bollinger Bands</label>
+                    <label class="check"><input type="checkbox" value="SAR" /> Parabolic SAR</label>
+                    <label class="check"><input type="checkbox" value="OBV" /> OBV</label>
+                </div>
+
+                <div class="actions">
+                    <button class="button" id="show">Preview Request</button>
+                    <button class="button secondary" id="clear">Clear</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <h2 class="box-title">Response (JSON)</h2>
+                <pre class="code" id="output">
+                    {"message": "Fill the form and click Preview Request"}
+                </pre>
+            </div>
         </div>
 
-        <div class="checks">
-          <p class="small">Technical Indicators</p>
-          <label class="check"
-            ><input type="checkbox" value="EMA" checked /> EMA</label
-          >
-          <label class="check"
-            ><input type="checkbox" value="RSI" checked /> RSI</label
-          >
-          <label class="check"
-            ><input type="checkbox" value="MACD" /> MACD</label
-          >
-          <label class="check"
-            ><input type="checkbox" value="VWAP" /> VWAP</label
-          >
-          <label class="check"
-            ><input type="checkbox" value="BOLL" /> Bollinger Bands</label
-          >
-          <label class="check"
-            ><input type="checkbox" value="SAR" /> Parabolic SAR</label
-          >
-          <label class="check"><input type="checkbox" value="OBV" /> OBV</label>
+        <div class="foot">
+            <p>© 2025 Humberto PinedaRubio. All rights reserved.</p>
         </div>
+    </body>
 
-        <div class="actions">
-          <button class="button" id="show">Preview Request</button>
-          <button class="button secondary" id="clear">Clear</button>
-        </div>
-      </div>
-
-      <div class="box">
-        <h2 class="box-title">Response (JSON)</h2>
-        <pre class="code" id="output">
-            {"message": "Fill the form and click Preview Request"}
-        </pre>
-      </div>
-    </div>
-
-    <div class="foot">
-      <p>© 2025 Humberto PinedaRubio. All rights reserved.</p>
-    </div>
-  </body>
 </html>
