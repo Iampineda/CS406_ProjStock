@@ -2,23 +2,28 @@ import * as tf from '@tensorflow/tfjs';
 
 let model;
 
-// Train the model once when first used
 async function trainModel() {
+  // Create a simple model
   model = tf.sequential();
   model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+
+  // Prepare the model for training
   model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
 
-  // Training data: y = 2x + 1
-  const xs = tf.tensor2d([0, 1, 2, 3, 4, 5], [6, 1]);
-  const ys = tf.tensor2d([1, 3, 5, 7, 9, 11], [6, 1]);
+  // Training data for y = 2x - 1
+  const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+  const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
 
-  await model.fit(xs, ys, { epochs: 50 });
+  // Train the model using the data
+  await model.fit(xs, ys, { epochs: 250 });
 }
 
-// Predict y for a given x
 export async function predictY(x) {
-  if (!model) await trainModel();
+  if (!model) {
+    await trainModel();
+  }
   const input = tf.tensor2d([Number(x)], [1, 1]);
   const output = model.predict(input);
-  return output.dataSync()[0]; // get the single prediction number
+  const y = output.dataSync()[0];
+  return y;
 }

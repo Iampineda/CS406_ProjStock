@@ -9,8 +9,16 @@ body {
   padding: 16px;
   border-bottom: 1px solid #2a3560;
 }
-.title { margin: 0 0 6px; font-size: 22px; }
-.tag { margin: 0; font-size: 13px; color: #a8b6ff; }
+
+.title { 
+  margin: 0 0 6px; 
+  font-size: 22px;
+}
+
+.tag { 
+  margin: 0; 
+  font-size: 13px; 
+  color: #a8b6ff; }
 
 .page {
   max-width: 860px;
@@ -25,10 +33,21 @@ body {
   padding: 12px;
   margin-bottom: 12px;
 }
-.box-title { margin: 0 0 10px; font-size: 18px; }
+
+.box-title { 
+  margin: 0 0 10px;
+  font-size: 18px;
+}
 
 .row { margin-bottom: 10px; }
-.label { display: block; font-size: 13px; color: #a8b6ff; margin-bottom: 4px; }
+
+.label { 
+  display: block; 
+  font-size: 13px; 
+  color: #a8b6ff; 
+  margin-bottom: 4px;
+}
+
 .input,
 .select {
   width: 100%;
@@ -41,10 +60,19 @@ body {
 }
 
 .checks { margin: 10px 0; }
-.small { font-size: 12px; color: #a8b6ff; margin: 0 0 6px; }
-.check { display: inline-block; margin: 6px 12px 0 0; }
+.small { 
+  font-size: 12px; 
+  color: #a8b6ff; 
+  margin: 0 0 6px; 
+}
+
+.check { 
+  display: inline-block; 
+  margin: 6px 12px 0 0; 
+}
 
 .actions { margin-top: 8px; }
+
 .button {
   padding: 8px 12px;
   border: 1px solid #2a3560;
@@ -53,6 +81,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .secondary { background: transparent; }
 
 .code {

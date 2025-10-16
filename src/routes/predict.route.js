@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', async (req, res) => {
   const x = req.query.x;
   const y = await predictY(x);
-  res.json({ x: Number(x), y });
+  res.json({ model: 'y=2x-1', x: Number(x), y });
 });
 
 export default router;
